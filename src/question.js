@@ -1,3 +1,4 @@
+//allquestions.js"i ayri bi sayfa yap
 class Question {
   constructor({ question, options, answer, level }) {
     this.question = question
@@ -7,7 +8,7 @@ class Question {
   }
 }
 // The problem arises here when I dont use another file as b2.js and I try to export the questions from this file.
-const B2 = [
+const allQuestions = [
   new Question({
     question: 'Ich gehe ___ Schule.',
     options: ['zur', 'in die', 'auf die', 'an die'],
@@ -39,5 +40,5 @@ const B2 = [
     level: 'B2',
   }),
 ]
-
-module.exports = { Question, B2 }
+// B2[0].v
+module.exports = { Question, allQuestions }

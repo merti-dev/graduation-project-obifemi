@@ -1,20 +1,19 @@
-const { Question, B2 } = require('./question')
+const { allQuestions } = require('./question')
 
 class Challenge {
-  scoreHost = 0
-  scoreGuest = 0
   winner = ''
   questions = []
-  constructor(level, attendees) {
+  attendees = []
+  constructor(level, challengesName) {
     this.level = level
-    this.attendees = attendees
-    this.questions = B2.filter(q => q.level === level)
-  }
-  questionsLog = () => {
-    console.log(`First question is ${this.questions[0].question}`)
+    this.challengesName = challengesName
+    this.questions = allQuestions.filter(q => q.level === level)
+    // this.deneme = {
+    //   first: this.questions[0].answer,
+    // }
   }
 }
 
-ch = new Challenge('B2', ['Mert', 'Ali'])
-ch.questionsLog()
+// ch = new Challenge('B2', ['Mert', 'Ali'])
+// ch.questionsLog()
 module.exports = Challenge

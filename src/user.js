@@ -1,4 +1,4 @@
-const Challange = require('./challenge')
+const Challenge = require('./challenge')
 
 class User {
   challenges = []
@@ -11,11 +11,14 @@ class User {
     this.challenges.push(challenge)
     challenge.attendees.push(this)
   }
-  createChallenge = (level, attendees) => {
-    const challenge = new Challenge(level, attendees)
+  createChallenge = (level, challengesName) => {
+    const challenge = new Challenge(level, challengesName)
+    this.challengesName = challengesName
     this.challenges.push(challenge)
-    challenge.attendees.push(this)
+    challenge.attendees.push(this.name)
+
     return challenge
   }
 }
+
 module.exports = User
