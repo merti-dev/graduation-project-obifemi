@@ -40,4 +40,4 @@ const B2 = [
   }),
 ]
 
-module.exports = Question
+module.exports = { Question, B2 }

@@ -1,5 +1,4 @@
-const Question = require('./question')
-const B2 = require('./b2')
+const { Question, B2 } = require('./question')
 
 class Challenge {
   scoreHost = 0
