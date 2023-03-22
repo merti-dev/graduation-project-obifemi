@@ -4,6 +4,19 @@ console.log('SimLang is a an app in which people can learn German')
 
 const Mert = new User('Mert', 'B2')
 const Ali = new User('Ali', 'B2')
+const AlisChallenge = Ali.createChallenge('B2', 'AlisChallenge')
+
+Mert.joinChallenge(AlisChallenge)
+
+// console.log(Mert)
+// console.log('end of Mert user')
+
+console.log(
+  Ali.challenges[0].attendees.forEach(element => {
+    console.log(element.name)
+  })
+)
+
 // console.log(Mert)
 // console.log(Ali)
 
