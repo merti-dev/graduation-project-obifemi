@@ -1,64 +1,13 @@
-//MVP
-// I need to make an app which will be based on german language challanges (questions)
-// The app will have a list of questions(10) and answers(10) during the.
-// The app will be multiplayer. Which means that users will be able to play against each other.
-// If one of the user answers the question correctly, he will get a point.
-// If both users answer the question (in the challenges) correctly, the app will give a point to the faster one.
-// I need two main objects, Users and Challanges. Users should be able to create a Challange and one other user should be able to join the Challange.
-// The user need to be able to choose the German level, create a Challange, and join a Challenge
-// The user need to be able to get a list of all Challanges in the same level.
-// Users should also be able to delete a challenge they created.
-// Users should also be able to delete their account.
-// Users should also be able to edit their account information.
-//End of MVP
-
-// Users should be able to save the questions from the challenge they want to learn later.
-// Users should be able to see the questions they have saved.
-// Users should be able to delete the questions they have saved.
-// Users should be able to save words from the challangs they want to learn by clicking on them.
+const User = require('./user')
 
 console.log('SimLang is a an app in which people can learn German')
 
-class User {
-  challenges = []
-  points = []
-  constructor(name, level) {
-    this.name = name
-    this.level = level
-  }
-  joinChallenge(challenge) {
-    this.challenges.push(challenge)
-    challenge.attendees.push(this)
-  }
-}
-
 const Mert = new User('Mert', 'B2')
 const Ali = new User('Ali', 'B2')
-console.log(Mert)
-console.log(Ali)
+// console.log(Mert)
+// console.log(Ali)
 
-class Challenge {
-  scoreHost = 0
-  scoreGuest = 0
-  winner = ''
-  constructor(level, attendees, questions) {
-    this.level = level
-    this.attendees = attendees
-    this.questions = questions
-  }
-}
-class Question {
-  constructor(question, options, answer, level) {
-    this.question = question
-    this.options = options
-    this.answer = answer
-    this.level = level
-  }
-}
-const MertsChallenge = new Challenge(B2, ['Mert'])
-const question1 = new Question('Wor___ wartest du this.attendees?', ['auf', 'zu', 'an'], 0, 'B2')
-const question2 = new Question('Wor___ wartest du this.attendees?', ['auf', 'zu', 'an'], 0, 'B2')
-console.log(MertsChallenge)
+// console.log(Mert)
 // console.log(MertsChallenge)
 
 // Ali.joinChallenge(MertsChallenge)
@@ -181,3 +130,22 @@ console.log(MertsChallenge)
 //     })
 //   }
 // }
+
+//MVP
+// I need to make an app which will be based on german language challanges (questions)
+// The app will have a list of questions(10) and answers(10) during the.
+// The app will be multiplayer. Which means that users will be able to play against each other.
+// If one of the user answers the question correctly, he will get a point.
+// If both users answer the question (in the challenges) correctly, the app will give a point to the faster one.
+// I need two main objects, Users and Challanges. Users should be able to create a Challange and one other user should be able to join the Challange.
+// The user need to be able to choose the German level, create a Challange, and join a Challenge
+// The user need to be able to get a list of all Challanges in the same level.
+// Users should also be able to delete a challenge they created.
+// Users should also be able to delete their account.
+// Users should also be able to edit their account information.
+//End of MVP
+
+// Users should be able to save the questions from the challenge they want to learn later.
+// Users should be able to see the questions they have saved.
+// Users should be able to delete the questions they have saved.
+// Users should be able to save words from the challangs they want to learn by clicking on them.
