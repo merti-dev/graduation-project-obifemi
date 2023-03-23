@@ -8,14 +8,16 @@ const AlisChallenge = Ali.createChallenge('B2', 'AlisChallenge')
 
 Mert.joinChallenge(AlisChallenge)
 
+console.log(AlisChallenge.details)
+
+// console.log(AlisChallenge)
+
 // console.log(Mert)
 // console.log('end of Mert user')
 
-console.log(
-  Ali.challenges[0].attendees.forEach(element => {
-    console.log(element.name)
-  })
-)
+// Ali.challenges[0].attendees.forEach(element => {
+//   console.log(element.name)
+// })
 
 // console.log(Mert)
 // console.log(Ali)

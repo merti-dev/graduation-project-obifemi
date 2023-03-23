@@ -1,4 +1,5 @@
 [![Open in Codespaces](https://classroom.github.com/assets/launch-codespace-f4981d0f882b2a3f0472912d15f9806d57e124e0fc890972558857b51b24a6f9.svg)](https://classroom.github.com/open-in-codespaces?assignment_repo_id=10553683)
+
 # Coyotiv School of Software Engineering
 
 ## Node & PlantUML Starter Template
@@ -83,3 +84,17 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
+
+---
+
+# Level: B2
+
+## Challenge's Name: AlisChallenge,
+
+### Questions: Ich gehe **_ Schule.,Ich komme _** Deutschland.,Ich wohne **_ Berlin.,Ich fahre _** Arbeit.,Ich bin \_\_\_ Bahnhof.,
+
+### Options: zur,in die,auf die,an die|,aus,von,nach,zu|,in,auf,an,bei|,zur,in die,auf die,an die|,am,im,auf dem,in dem|,
+
+### Answers: zur,aus,in,zur,am,
+
+      Attendees: Ali,Mert,

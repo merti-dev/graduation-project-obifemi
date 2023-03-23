@@ -13,9 +13,10 @@ class User {
   }
   createChallenge = (level, challengesName) => {
     const challenge = new Challenge(level, challengesName)
+
     this.challengesName = challengesName
     this.challenges.push(challenge)
-    challenge.attendees.push(this.name)
+    challenge.attendees.push(this)
 
     return challenge
   }
