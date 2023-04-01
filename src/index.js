@@ -1,14 +1,40 @@
 const User = require('./user')
+const axios = require('axios')
 
 console.log('SimLang is a an app in which people can learn German')
 
-const Mert = new User('Mert', 'B2')
-const Ali = new User('Ali', 'B2')
-const AlisChallenge = Ali.createChallenge('B2', 'AlisChallenge')
+// const Mert = new User('Mert', 'B2')
+// const Ali = new User('Ali', 'B2')
+// const AlisChallenge = Ali.createChallenge('B2', 'AlisChallenge')
 
-Mert.joinChallenge(AlisChallenge)
+// Mert.joinChallenge(AlisChallenge)
 
-console.log(AlisChallenge.details)
+// console.log(AlisChallenge.details)
+
+async function main() {
+  const Mert = await axios.post('http://localhost:3000/users', { name: 'Mert', level: 'B2' })
+  console.log(Mert.data)
+  const elif = await axios.post('http://localhost:3000/users', { name: 'Elif', level: 'B2' })
+  // console.log(elif.data)
+
+  const allUsers = await axios.get('http://localhost:3000/users')
+  console.log('List of the name of all users', allUsers.data)
+
+  const MertsChallenge = await axios.post('http://localhost:3000/users/Mert/challenges', {
+    level: 'B2',
+    challengesName: 'MertsChallenge',
+  })
+
+  await axios.post('http://localhost:3000/users/Mert/challenges/MertsChallenge/attendees', {
+    userId: 'Elif',
+  })
+  console.log('Challenge from Mert:', MertsChallenge.data)
+}
+
+main()
+// axios.post('http://localhost:3000/users', { name: 'Mert', level: 'B2' }).then(response => {
+//   console.log(response.data)
+// })
 
 // console.log(AlisChallenge)
 

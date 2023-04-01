@@ -1,6 +1,11 @@
-@startuml Person 
-class Person {
+@startuml Challenge App
+class User {
+  challenges: array
+  points: number
   name: string
-  age: number
+  level: object
+  joinChallenge(challenge: object)
+  leaveChallenge(challenge: object)
+
 }
 @enduml
