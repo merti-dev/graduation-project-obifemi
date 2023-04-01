@@ -3,9 +3,8 @@ const { allQuestions } = require('./question')
 class Challenge {
   winner = ''
   questions = []
-
+  attendees = []
   constructor(level, challengesName) {
-    this.attendees = []
     this.level = level
     this.challengesName = challengesName
     this.questions = allQuestions.filter(q => q.level === level)

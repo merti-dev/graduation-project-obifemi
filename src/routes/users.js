@@ -1,13 +1,20 @@
 var express = require('express')
 var router = express.Router()
-const Challange = require('../challenge')
+const Challenge = require('../challenge')
 
 const User = require('../user')
 /* GET users listing. */
 router.get('/', function (req, res, next) {
   res.send(User.list.map(user => user.name))
 })
-
+router.get('/:userId', function (req, res, next) {
+  const user = User.list.find(user => user.name === req.params.userId)
+  if (!user) {
+    res.status(404).send('User not found')
+    return
+  }
+  res.send(user)
+})
 //Creation of Mert and Elif
 router.post('/', function (req, res, next) {
   const user = User.create(req.body.name, req.body.level)
@@ -22,12 +29,16 @@ router.post('/:userId/challenges', function (req, res, next) {
 })
 
 //join a challlenge
-router.post('/:userId/challenges/:challangeId/attendees', function (req, res, next) {
-  const challange = Challange.list.find(challange => challange.challengesName === req.params.challangeId)
+router.post('/:userId/challenges/:challengeId/attendees', function (req, res, next) {
+  const challenge = Challenge.list.find(challenge => challenge.challengesName === req.params.challengeId)
   const user = User.list.find(user => user.name === req.body.userId)
-  console.log(user)
-  user.joinChallenge(challange)
-  res.send(challange)
+  // console.log(Challenge.list)
+  if (!challenge) {
+    res.status(404).send('Challenge not found')
+    return
+  }
+  user.joinChallenge(challenge)
+  res.send(challenge)
 })
 
 module.exports = router

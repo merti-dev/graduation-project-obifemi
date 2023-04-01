@@ -1,3 +1,4 @@
+const Challenge = require('./challenge')
 const User = require('./user')
 const axios = require('axios')
 
@@ -15,7 +16,7 @@ async function main() {
   const Mert = await axios.post('http://localhost:3000/users', { name: 'Mert', level: 'B2' })
   console.log(Mert.data)
   const elif = await axios.post('http://localhost:3000/users', { name: 'Elif', level: 'B2' })
-  // console.log(elif.data)
+  console.log('Elif:', elif.data)
 
   const allUsers = await axios.get('http://localhost:3000/users')
   console.log('List of the name of all users', allUsers.data)
@@ -28,7 +29,8 @@ async function main() {
   await axios.post('http://localhost:3000/users/Mert/challenges/MertsChallenge/attendees', {
     userId: 'Elif',
   })
-  console.log('Challenge from Mert:', MertsChallenge.data)
+  console.log('Elif Updated:', elif.data)
+  console.log(MertsChallenge.data)
 }
 
 main()
@@ -173,14 +175,14 @@ main()
 // }
 
 //MVP
-// I need to make an app which will be based on german language challanges (questions)
+// I need to make an app which will be based on german language challenges (questions)
 // The app will have a list of questions(10) and answers(10) during the.
 // The app will be multiplayer. Which means that users will be able to play against each other.
 // If one of the user answers the question correctly, he will get a point.
 // If both users answer the question (in the challenges) correctly, the app will give a point to the faster one.
-// I need two main objects, Users and Challanges. Users should be able to create a Challange and one other user should be able to join the Challange.
-// The user need to be able to choose the German level, create a Challange, and join a Challenge
-// The user need to be able to get a list of all Challanges in the same level.
+// I need two main objects, Users and Challenges. Users should be able to create a Challenge and one other user should be able to join the Challenge.
+// The user need to be able to choose the German level, create a Challenge, and join a Challenge
+// The user need to be able to get a list of all Challenges in the same level.
 // Users should also be able to delete a challenge they created.
 // Users should also be able to delete their account.
 // Users should also be able to edit their account information.

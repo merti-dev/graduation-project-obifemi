@@ -9,23 +9,25 @@ class User {
   }
 
   createChallenge = (level, challengesName) => {
-    const challenge = new Challenge(level, challengesName)
+    const challenge = Challenge.create(level, challengesName)
 
-    this.challengesName = challengesName
+    // this.challengesName = challengesName
     this.challenges.push(challenge)
+
     challenge.attendees.push(this.name)
 
     return challenge
   }
   joinChallenge = challenge => {
     this.challenges.push(challenge)
-    this.challenges[0].attendees.push(name)
-    console.log(this.challenges[0].attendees)
+    challenge.attendees.push(this.name)
+    console.log(challenge)
+    return challenge
   }
   static create = (name, level) => {
     const newUser = new User(name, level)
     User.list.push(newUser)
-    return new User(name, level)
+    return newUser
   }
   static list = []
 }
