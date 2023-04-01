@@ -24,7 +24,7 @@ router.post('/:userId/challenges', function (req, res, next) {
 //join a challlenge
 router.post('/:userId/challenges/:challangeId/attendees', function (req, res, next) {
   const challange = Challange.list.find(challange => challange.challengesName === req.params.challangeId)
-  const user = User.list.find(user => user.name === req.params.userId)
+  const user = User.list.find(user => user.name === req.body.userId)
   console.log(user)
   user.joinChallenge(challange)
   res.send(challange)
