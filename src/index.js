@@ -4,14 +4,6 @@ const axios = require('axios')
 
 console.log('SimLang is a an app in which people can learn German')
 
-// const Mert = new User('Mert', 'B2')
-// const Ali = new User('Ali', 'B2')
-// const AlisChallenge = Ali.createChallenge('B2', 'AlisChallenge')
-
-// Mert.joinChallenge(AlisChallenge)
-
-// console.log(AlisChallenge.details)
-
 async function main() {
   const Mert = await axios.post('http://localhost:3000/users', { name: 'Mert', level: 'B2' })
   console.log(Mert.data)

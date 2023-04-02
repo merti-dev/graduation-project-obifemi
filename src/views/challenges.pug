@@ -1,0 +1,9 @@
+extends layout
+
+block content
+
+  h3  List of challenges
+  ul
+    each challenge in challenges
+      li
+        a(href=`/challenges/${challenge.challengesName}`)= challenge.challengesName

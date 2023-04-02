@@ -1,0 +1,8 @@
+extends layout
+
+block content
+  h1= title
+  h3 Welcome to #{title}
+  ul#characters
+    each user in users
+      li.character= user.name

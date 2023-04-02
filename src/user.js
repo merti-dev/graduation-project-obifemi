@@ -2,7 +2,7 @@ const Challenge = require('./challenge')
 
 class User {
   challenges = []
-  points = 0
+  score = 0
   constructor(name, level) {
     this.name = name
     this.level = level
@@ -21,7 +21,7 @@ class User {
   joinChallenge = challenge => {
     this.challenges.push(challenge)
     challenge.attendees.push(this.name)
-    console.log(challenge)
+    // console.log(challenge)
     return challenge
   }
   static create = (name, level) => {
