@@ -4,23 +4,30 @@ block content
   h1 Welcome to German Challenge! Now you are in: #{challenge.challengesName}
   // todo - add a form with a question from challenge.questions and 4 options from challenge.questions of which only one is correct (radio buttons) and a submit button (form action should be /challenges/${challenge.challengesName}/${questionID}/answer) - use the challenge object to get the question and options . Also add a hidden input field with the name of the user (value should be the name of the user) - this will be used to check if the user has already answered the question or not (if the user has already answered the question, the form should not be displayed) - you can use the challenge object to get the name of the user
 
-  form(action=`/challenges/${challenge.challengesName}/${questionID}` method='POST')
-    fieldset
-      legend= challenge.questions[questionID].question
-      div
-        input#a(type='radio' name='answer' value='a' checked='')
-        label(for='a')= challenge.questions[questionID].options[0]
-      div
-        input#b(type='radio' name='answer' value='b')
-        label(for='b')= challenge.questions[questionID].options[1]
-      div
-        input#c(type='radio' name='answer' value='c')
-        label(for='c')= challenge.questions[questionID].options[2]
-      div
-        input#d(type='radio' name='answer' value='d')
-        label(for='d')= challenge.questions[questionID].options[3]
-      input(type='hidden' name='user' value=`${user}`)
-      button(type='submit') Submit Answer
+  if message=='Correct'
+    h2.green Correct!
+    a(href=`/challenges/${challenge.challengesName}/${questionID+1}`) Next Qeustion
+  else if message=='Incorrect'
+    h2.red Incorrect!
+    a(href=`/challenges/${challenge.challengesName}/${questionID+1}`) Next Qeustion
+  else
+    form(action=`/challenges/${challenge.challengesName}/${questionID}` method='POST')
+      fieldset
+        legend= challenge.questions[questionID].question
+        div
+          input#a(type='radio' name='answer' value='zur' checked='')
+          label(for='a')= challenge.questions[questionID].options[0]
+        div
+          input#b(type='radio' name='answer' value='in die')
+          label(for='b')= challenge.questions[questionID].options[1]
+        div
+          input#c(type='radio' name='answer' value='auf die')
+          label(for='c')= challenge.questions[questionID].options[2]
+        div
+          input#d(type='radio' name='answer' value='an die')
+          label(for='d')= challenge.questions[questionID].options[3]
+        input#Mert(type='hidden' name='userID' value='Mert')
+        button(type='submit') Submit Answer
 
 
 

@@ -3,6 +3,7 @@ var router = express.Router()
 const Challenge = require('../challenge')
 const User = require('../user')
 
+//join a challlenge
 router.post('/:challengeId/attendees', function (req, res, next) {
   const challenge = Challenge.list.find(challenge => challenge.challengesName === req.params.challengeId)
   const user = User.list.find(user => user.name === req.body.userId)
@@ -23,15 +24,11 @@ router.get('/', function (req, res, next) {
 
   res.render('challenges', {
     challenges: Challenge.list,
-    // title: `Welcome to German Challenge! Now you are in:
-    // ${
-    //   Challenge.list.indexOf(Challenge.list.find(challenge => challenge.challengesName === req.params.challengeId)) + 1
-    // }`,
   })
 })
 
-router.get('/:challengeId', function (req, res, next) {
-  const challenge = Challenge.list.find(challenge => challenge.challengesName === req.params.challengeId)
+router.get('/:challengesName', function (req, res, next) {
+  const challenge = Challenge.list.find(challenge => challenge.challengesName === req.params.challengesName)
 
   if (!challenge) {
     res.status(404).send('Challenge not found')
@@ -45,20 +42,39 @@ router.get('/:challengeId', function (req, res, next) {
     questionID: 0,
   })
 })
+router.get('/:challengesName/:questionID', function (req, res, next) {
+  const challenge = Challenge.list.find(challenge => challenge.challengesName === req.params.challengesName)
+  console.log(challenge)
+  const questionID = +req.params.questionID
 
-//check the answers of the question and give the score to the user who answered correctly
-router.post('/:challengeId/attendees/:userId', function (req, res, next) {
-  const challenge = Challenge.list.find(challenge => challenge.challengesName === req.params.challengeId)
-  const user = User.list.find(user => user.name === req.params.userId)
-  const question = challenge.questions.find(q => q.question === req.body.question)
-  if (question.answer === req.body.answer) {
-    user.score += 1
-  }
-  res.redirect(`/challenges/${challenge.challengesName}/req.params.${questionID + 1}`)
+  // res.redirect(`/challenges/${challenge.challengesName}/${questionID + 1}`)
   res.render('challenge', {
     challenge: challenge,
-    questionID: 1,
+    questionID: questionID,
+    message: req.query.message,
   })
+})
+//check the answers of the question and give the score to the user who answered correctly
+router.post('/:challengesName/:questionID', function (req, res, next) {
+  const challenge = Challenge.list.find(challenge => challenge.challengesName === req.params.challengesName)
+  console.log(challenge)
+  const questionID = +req.params.questionID
+  const user = User.list.find(user => user.name === req.body.userID)
+  console.log(User.list)
+
+  const question = challenge.questions[questionID]
+  console.log(question)
+
+  if (question.answer === req.body.answer) {
+    user.score += 1
+    res.redirect(`/challenges/${challenge.challengesName}/${questionID}?message=Correct`)
+    return
+  }
+  res.redirect(`/challenges/${challenge.challengesName}/${questionID}?message=Incorrect`)
+  // res.render('challenge', {
+  //   challenge: challenge,
+  //   questionID: questionID + 1,
+  // })
 })
 
 module.exports = router
