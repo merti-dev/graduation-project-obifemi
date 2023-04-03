@@ -11,7 +11,7 @@ async function main() {
   console.log('Elif:', elif.data)
 
   const allUsers = await axios.get('http://localhost:3000/users')
-  console.log('List of the name of all users', allUsers.data)
+  // console.log('List of the name of all users', allUsers.data)
 
   const MertsChallenge = await axios.post('http://localhost:3000/users/Mert/challenges', {
     level: 'B2',
@@ -21,8 +21,8 @@ async function main() {
   await axios.post('http://localhost:3000/users/Mert/challenges/MertsChallenge/attendees', {
     userId: 'Elif',
   })
-  console.log('Elif Updated:', elif.data)
-  console.log(MertsChallenge.data)
+  // console.log('Elif Updated:', elif.data)
+  // console.log(MertsChallenge.data)
 }
 
 main()

@@ -2,9 +2,7 @@ var express = require('express')
 var router = express.Router()
 const Challenge = require('../challenge')
 const User = require('../user')
-/* GET users listing. */
 
-//join a challlenge
 router.post('/:challengeId/attendees', function (req, res, next) {
   const challenge = Challenge.list.find(challenge => challenge.challengesName === req.params.challengeId)
   const user = User.list.find(user => user.name === req.body.userId)
@@ -44,6 +42,7 @@ router.get('/:challengeId', function (req, res, next) {
 
   res.render('challenge', {
     challenge: challenge,
+    questionID: 0,
   })
 })
 
@@ -55,7 +54,11 @@ router.post('/:challengeId/attendees/:userId', function (req, res, next) {
   if (question.answer === req.body.answer) {
     user.score += 1
   }
-  res.send(user)
+  res.redirect(`/challenges/${challenge.challengesName}/req.params.${questionID + 1}`)
+  res.render('challenge', {
+    challenge: challenge,
+    questionID: 1,
+  })
 })
 
 module.exports = router

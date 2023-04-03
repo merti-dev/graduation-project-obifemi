@@ -2,23 +2,44 @@ extends layout
 
 block content
   h1 Welcome to German Challenge! Now you are in: #{challenge.challengesName}
-  // todo - add a form with a question and 4 options of which only one is correct (radio buttons) and a submit button (form action should be /challenges/${challenge.challengesName}/${questionID}/answer) - use the challenge object to get the question and options . Also add a hidden input field with the name of the user (value should be the name of the user) - this will be used to check if the user has already answered the question or not (if the user has already answered the question, the form should not be displayed) - you can use the challenge object to get the name of the user
+  // todo - add a form with a question from challenge.questions and 4 options from challenge.questions of which only one is correct (radio buttons) and a submit button (form action should be /challenges/${challenge.challengesName}/${questionID}/answer) - use the challenge object to get the question and options . Also add a hidden input field with the name of the user (value should be the name of the user) - this will be used to check if the user has already answered the question or not (if the user has already answered the question, the form should not be displayed) - you can use the challenge object to get the name of the user
 
-  form(action=`/challenges/${challenge.challengesName}/attendees/Mert` method='POST')
-
-
-
+  form(action=`/challenges/${challenge.challengesName}/${questionID}` method='POST')
     fieldset
-      legend= challenge.questions[0].question
+      legend= challenge.questions[questionID].question
       div
-        input#a(type='radio' name='drone' value='a' checked='')
-        label(for='a')= challenge.questions[0].options[0]
+        input#a(type='radio' name='answer' value='a' checked='')
+        label(for='a')= challenge.questions[questionID].options[0]
       div
-        input#b(type='radio' name='drone' value='b')
-        label(for='b')= challenge.questions[0].options[1]
+        input#b(type='radio' name='answer' value='b')
+        label(for='b')= challenge.questions[questionID].options[1]
       div
-        input#c(type='radio' name='drone' value='c')
-        label(for='c')= challenge.questions[0].options[2]
+        input#c(type='radio' name='answer' value='c')
+        label(for='c')= challenge.questions[questionID].options[2]
       div
-        input#d(type='radio' name='drone' value='d')
-        label(for='d')= challenge.questions[0].options[3]
+        input#d(type='radio' name='answer' value='d')
+        label(for='d')= challenge.questions[questionID].options[3]
+      input(type='hidden' name='user' value=`${user}`)
+      button(type='submit') Submit Answer
+
+
+
+
+  //- form(action=`/challenges/${challenge.challengesName}/attendees/Mert` method='POST')
+
+
+
+  //-   fieldset
+  //-     legend= challenge.questions[0].question
+  //-     div
+  //-       input#a(type='radio' name='drone' value='a' checked='')
+  //-       label(for='a')= challenge.questions[0].options[0]
+  //-     div
+  //-       input#b(type='radio' name='drone' value='b')
+  //-       label(for='b')= challenge.questions[0].options[1]
+  //-     div
+  //-       input#c(type='radio' name='drone' value='c')
+  //-       label(for='c')= challenge.questions[0].options[2]
+  //-     div
+  //-       input#d(type='radio' name='drone' value='d')
+  //-       label(for='d')= challenge.questions[0].options[3]
