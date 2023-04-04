@@ -52,6 +52,7 @@ router.get('/:challengesName/:questionID', function (req, res, next) {
     challenge: challenge,
     questionID: questionID,
     message: req.query.message,
+    score: req.query.score,
   })
 })
 //check the answers of the question and give the score to the user who answered correctly
@@ -67,7 +68,8 @@ router.post('/:challengesName/:questionID', function (req, res, next) {
 
   if (question.answer === req.body.answer) {
     user.score += 1
-    res.redirect(`/challenges/${challenge.challengesName}/${questionID}?message=Correct`)
+    let scoree = String(user.score)
+    res.redirect(`/challenges/${challenge.challengesName}/${questionID}?message=Correct&score=${user.score}`)
     return
   }
   res.redirect(`/challenges/${challenge.challengesName}/${questionID}?message=Incorrect`)

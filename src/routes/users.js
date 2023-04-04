@@ -1,7 +1,6 @@
 var express = require('express')
 var router = express.Router()
 const Challenge = require('../challenge')
-
 const User = require('../user')
 /* GET users listing. */
 router.get('/', function (req, res, next) {
@@ -14,6 +13,7 @@ router.get('/:userId', function (req, res, next) {
     return
   }
   res.send(user)
+  console.log(user)
 })
 //Creation of Mert and Elif
 router.post('/', function (req, res, next) {
@@ -39,6 +39,7 @@ router.post('/:userId/challenges/:challengeId/attendees', function (req, res, ne
   }
   user.joinChallenge(challenge)
   res.send(challenge)
+  console.log(user)
 })
 
 module.exports = router
