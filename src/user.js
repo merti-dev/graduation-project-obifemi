@@ -1,5 +1,18 @@
 const Challenge = require('./challenge')
+const mongoose = require('mongoose')
+const userSchema = new mongoose.Schema({
+  name: String,
+  level: String,
+  challenges: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'Challenge',
+    },
+  ],
+  score: Number,
+})
 
+module.exports = mongoose.model('User', userSchema)
 class User {
   challenges = []
   score = 0
@@ -32,4 +45,4 @@ class User {
   static list = []
 }
 
-module.exports = User
+// module.exports = User

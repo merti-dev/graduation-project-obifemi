@@ -4,31 +4,34 @@ const axios = require('axios')
 
 console.log('SimLang is a an app in which people can learn German')
 
+let MertData = { name: 'Mert', level: 'B2' }
+
 async function main() {
   const Mert = await axios.post('http://localhost:3000/users', { name: 'Mert', level: 'B2' })
   console.log(Mert.data)
+
   const elif = await axios.post('http://localhost:3000/users', { name: 'Elif', level: 'B2' })
   console.log('Elif:', elif.data)
 
   const allUsers = await axios.get('http://localhost:3000/users')
   console.log('List of the name of all users', allUsers.data)
-
-  const MertsChallenge = await axios.post('http://localhost:3000/users/Mert/challenges', {
-    level: 'B2',
-    challengesName: 'MertsChallenge',
-  })
-
-  const bla = await axios.get('http://localhost:3000/challenges')
-  console.log('ChallengeList:', bla.data)
-
-  await axios.post('http://localhost:3000/users/Mert/challenges/MertsChallenge/attendees', {
-    userId: 'Elif',
-  })
-  // console.log('Elif Updated:', elif.data)
-  // console.log(MertsChallenge.data)
-  const mertt = await axios.get('http://localhost:3000/users/Mert')
-  // console.log('Mert Updated:', mertt.data)
 }
+//   const MertsChallenge = await axios.post('http://localhost:3000/users/Mert/challenges', {
+//     level: 'B2',
+//     challengesName: 'MertsChallenge',
+//   })
+
+//   const bla = await axios.get('http://localhost:3000/challenges')
+//   console.log('ChallengeList:', bla.data)
+
+//   await axios.post('http://localhost:3000/users/Mert/challenges/MertsChallenge/attendees', {
+//     userId: 'Elif',
+//   })
+//   // console.log('Elif Updated:', elif.data)
+//   // console.log(MertsChallenge.data)
+//   const mertt = await axios.get('http://localhost:3000/users/Mert')
+//   // console.log('Mert Updated:', mertt.data)
+// }
 
 main()
 // axios.post('http://localhost:3000/users', { name: 'Mert', level: 'B2' }).then(response => {
