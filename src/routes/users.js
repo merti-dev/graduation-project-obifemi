@@ -11,17 +11,19 @@ router.post('/', function (req, res, next) {
 
 /* GET users listing. */
 router.get('/', function (req, res, next) {
-  res.send(User.list.map(user => user.name))
+  const users = User.find().then(users => {
+    res.send(users)
+  })
 })
-router.get('/:userId', function (req, res, next) {
-  const user = User.list.find(user => user.name === req.params.userId)
-  if (!user) {
-    res.status(404).send('User not found')
-    return
-  }
-  res.send(user)
-  console.log(user)
-})
+// router.get('/:userId', function (req, res, next) {
+//   const user = User.list.find(user => user.name === req.params.userId)
+//   if (!user) {
+//     res.status(404).send('User not found')
+//     return
+//   }
+//   res.send(user)
+//   console.log(user)
+// })
 
 //Create a challenge for a user
 // router.post('/:userId/challenges', function (req, res, next) {
