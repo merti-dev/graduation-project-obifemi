@@ -4,12 +4,12 @@ const Challenge = require('../challenge')
 const User = require('../user')
 
 //join a challlenge
-router.post('/:challengeId/attendees', function (req, res, next) {
-  const challenge = Challenge.list.find(challenge => challenge.challengesName === req.params.challengeId)
-  const user = User.list.find(user => user.name === req.body.userId)
-  user.joinChallenge(challenge)
-  res.send(challenge)
-})
+// router.post('/:challengeId/attendees', async function (req, res, next) {
+//   const challenge = await Challenge.list.find(challenge => challenge.challengesName === req.params.challengeId)
+//   const user = await User.list.find(user => user.name === req.body.userId)
+//   user.joinChallenge(challenge)
+//   res.send(challenge)
+// })
 
 // router.get('/', function (req, res, next) {
 //   res.render('challenges', {
@@ -18,12 +18,14 @@ router.post('/:challengeId/attendees', function (req, res, next) {
 //   })
 // })
 
-router.get('/', function (req, res, next) {
-  console.log(Challenge.list)
-  if (req.query.view === 'json') return res.send(Challenge.list)
+router.get('/', async function (req, res, next) {
+  const challenges = await Challenge.find()
+  // res.send(challenges)
+  console.log("Mert'in Challenge List Denemesi: ", await Challenge.find())
+  if (req.query.view === 'json') return res.send(challenges)
 
   res.render('challenges', {
-    challenges: Challenge.list,
+    challenges: challenges,
   })
 })
 
