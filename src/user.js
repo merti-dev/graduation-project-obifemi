@@ -30,12 +30,15 @@ class User {
     this.challenges.push(challenge._id)
 
     challenge.attendees.push(this)
-    challenge.save()
+    await challenge.save()
     return challenge
   }
-  joinChallenge = challenge => {
-    this.challenges.push(challenge._id)
-    challenge.attendees.push(this.name_id)
+  async joinChallenge(challenge) {
+    this.challenges.push(challenge)
+    challenge.attendees.push(this)
+
+    await this.save()
+    await challenge.save()
     // console.log(challenge)
     return challenge
   }

@@ -33,15 +33,17 @@ router.post('/:userId/challenges', async function (req, res, next) {
 
 //join a challlenge
 router.post('/:userId/challenges/:challengeId/attendees', async function (req, res, next) {
-  const challenge = await Challenge.findById({ _id: req.params.userId })
+  const challenge = await Challenge.findById({ _id: req.params.challengeId })
 
-  const user = await User.findById({ _id: req.params.userId })
+  const user = await User.findById({ _id: req.body.userId })
   // console.log(Challenge.list)
   if (!challenge) {
     res.status(404).send('Challenge not found')
     return
   }
-  user.joinChallenge(challenge)
+  console.log(user)
+
+  await user.joinChallenge(challenge)
   res.send(challenge)
   // console.log(user)
 })

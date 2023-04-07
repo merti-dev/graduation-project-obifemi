@@ -30,11 +30,11 @@ async function main() {
   //   const bla = await axios.get('http://localhost:3000/challenges')
   //   console.log('ChallengeList:', bla.data)
 
-  //   await axios.post('http://localhost:3000/users/Mert/challenges/MertsChallenge/attendees', {
-  //     userId: 'Elif',
-  //   })
-  //   console.log('Elif Updated:', elif.data)
-  //   console.log("Mert's Challenge Data:", MertsChallenge.data)
+  await axios.post(`http://localhost:3000/users/${Mert.data._id}/challenges/${MertsChallenge.data._id}/attendees`, {
+    userId: elif.data._id,
+  })
+  console.log('Elif Updated:', elif.data)
+  console.log("Mert's Challenge Data:", MertsChallenge.data)
 }
 
 main().catch(err => console.log(err))
