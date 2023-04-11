@@ -25,7 +25,7 @@ async function main() {
     level: 'B2',
     challengesName: 'MertsChallenge',
   })
-  // console.log('MertsChallenge:', MertsChallenge.data)
+  console.log('MertsChallenge:', MertsChallenge.data.questions[0].question)
 
   //   const bla = await axios.get('http://localhost:3000/challenges')
   //   console.log('ChallengeList:', bla.data)

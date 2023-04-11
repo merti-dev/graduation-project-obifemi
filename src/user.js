@@ -1,4 +1,5 @@
 const Challenge = require('./challenge')
+const Question = require('./question')
 const mongoose = require('mongoose')
 const autopopulate = require('mongoose-autopopulate')
 const userSchema = new mongoose.Schema({
@@ -11,24 +12,17 @@ const userSchema = new mongoose.Schema({
       autopopulate: { maxDepth: 1 },
     },
   ],
-  score: Number,
+  score: { type: Number, default: 0 },
 })
 
 // module.exports = mongoose.model('User', userSchema)
 class User {
-  challenges = []
-  score = 0
-  constructor(name, level) {
-    this.name = name
-    this.level = level
-  }
-
   async createChallenge(level, challengesName) {
     const challenge = await Challenge.create({ level: level, challengesName: challengesName })
-
+    challenge.questions = await Question.find({ level: level })
     // this.challengesName = challengesName
     this.challenges.push(challenge._id)
-
+    await this.save()
     challenge.attendees.push(this)
     await challenge.save()
     return challenge

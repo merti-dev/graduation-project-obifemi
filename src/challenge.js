@@ -1,4 +1,4 @@
-const { allQuestions } = require('./question')
+// const { allQuestions } = require('./question')
 const mongoose = require('mongoose')
 const autopopulate = require('mongoose-autopopulate')
 const challengeSchema = new mongoose.Schema({

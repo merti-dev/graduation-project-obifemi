@@ -16,7 +16,7 @@ router.get('/', async function (req, res, next) {
   //GET user based on id
 })
 router.get('/:userId', async function (req, res, next) {
-  const user = await User.findById({ _id: req.params.userId })
+  const user = await User.findById(req.params.userId)
   if (!user) {
     res.status(404).send('User not found')
     return
@@ -26,22 +26,21 @@ router.get('/:userId', async function (req, res, next) {
 
 //Create a challenge for a user
 router.post('/:userId/challenges', async function (req, res, next) {
-  const user = await User.findById({ _id: req.params.userId })
+  const user = await User.findById(req.params.userId)
   const challenge = await user.createChallenge(req.body.level, req.body.challengesName)
   res.send(challenge)
 })
 
-//join a challlenge
+//join a challlenge //ask question about this
 router.post('/:userId/challenges/:challengeId/attendees', async function (req, res, next) {
-  const challenge = await Challenge.findById({ _id: req.params.challengeId })
+  const challenge = await Challenge.findById(req.params.challengeId)
 
-  const user = await User.findById({ _id: req.body.userId })
+  const user = await User.findById(req.body.userId)
   // console.log(Challenge.list)
   if (!challenge) {
     res.status(404).send('Challenge not found')
     return
   }
-  console.log(user)
 
   await user.joinChallenge(challenge)
   res.send(challenge)
