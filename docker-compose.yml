@@ -1,0 +1,16 @@
+services:
+  api:
+    image: cicd102
+    build: .
+    depends_on:
+      - mongodb
+    ports:
+      - '3000:3000'
+    environment:
+      - MONGODB_CONNECTION_STRING=mongodb://mongodb:27017/challanguage-test
+  mongodb:
+    image: mongo
+    ports:
+      - '27017:27017'
+    volumes:
+      - ./data:/data/db
