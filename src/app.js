@@ -13,6 +13,14 @@ var Question = require('./question')
 
 var app = express()
 
+// if (app.get('env') === 'development') {
+//   app.use(require('livereload')())
+
+//   require('livereload')
+//     .createServer({ extraExts: ['pug'] })
+//     .watch([__dirname + '/public', __dirname + '/views'])
+// }
+
 // view engine setup
 app.set('views', path.join(__dirname, 'views'))
 app.set('view engine', 'pug')

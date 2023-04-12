@@ -5,8 +5,8 @@
   "description": "Node + PlantUML Starter Template",
   "license": "MIT",
   "scripts": {
-    "start": "set PORT:8080 && nodemon ./bin/www",
-    "dev": "set PORT:8080 && nodemon ./bin/www",
+    "start": " nodemon ./bin/www",
+    "dev": " nodemon ./bin/www",
     "eslint:check": "npx eslint .",
     "eslint:fix": "npx eslint --fix .",
     "test": "echo \"Error: no test specified\" && exit 1"
