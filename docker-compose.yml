@@ -6,8 +6,20 @@ services:
       - mongodb
     ports:
       - '3000:3000'
+
     env_file:
       - backend/.env
+  frontend:
+    image: picnigram-frontend
+    build:
+      context: frontend
+      dockerfile: Dockerfile
+    ports:
+      - 5173:5173
+    volumes:
+      - ./frontend/src:/app/src
+      - ./frontend/public:/app/public
+
   mongodb:
     image: mongo
     ports:
