@@ -1,13 +1,13 @@
 services:
   api:
     image: cicd102
-    build: .
+    build: ./backend
     depends_on:
       - mongodb
     ports:
       - '3000:3000'
-    environment:
-      - MONGODB_CONNECTION_STRING=mongodb://mongodb:27017/challanguage-test
+    env_file:
+      - backend/.env
   mongodb:
     image: mongo
     ports:
