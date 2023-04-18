@@ -21,10 +21,10 @@ const User = require('../user')
 router.get('/', async function (req, res, next) {
   const challenges = await Challenge.find()
   if (req.query.view === 'json') return res.send(challenges)
-
-  res.render('challenges', {
-    challenges: challenges,
-  })
+  res.send(challenges)
+  // res.render('challenges', {
+  //   challenges: challenges,
+  // })
 })
 
 router.get('/:challengesID', async function (req, res, next) {

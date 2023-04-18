@@ -3,6 +3,7 @@ var express = require('express')
 var path = require('path')
 var cookieParser = require('cookie-parser')
 var logger = require('morgan')
+const cors = require('cors')
 require('dotenv').config()
 require('./database-connection')
 var indexRouter = require('./routes/index')
@@ -12,6 +13,7 @@ var Question = require('./question')
 // var questionsRouter = require('./routes/questions')
 
 var app = express()
+app.use(cors())
 
 // if (app.get('env') === 'development') {
 //   app.use(require('livereload')())
