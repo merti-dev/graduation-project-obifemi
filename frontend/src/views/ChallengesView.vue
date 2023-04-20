@@ -9,10 +9,10 @@ const { data: challenges } = await axios.get('http://127.0.0.1:3000/challenges/'
 .challenges
   h1 Challenges
   ul
-    li(v-for='challenge in challenges' :key='challenge.id')
-      | The challange is:
-      | {{ challenge.challengesName }} and the attendees are {{ challenge.attendees[0].name }} and
-      | {{ challenge.attendees[1].name }}
+    li(v-for="challenge in challenges" :key="challenge._id")
+      RouterLink(:to="`/challenges/${challenge._id}`")
+        | {{ challenge.challengesName }} - {{ challenge.level }}
+      p {{ challenge.attendees.length }} people are attending
 
 </template>
 
