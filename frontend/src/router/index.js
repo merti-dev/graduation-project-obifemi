@@ -16,6 +16,11 @@ const router = createRouter({
       component: ChallengesView
     },
     {
+      path: '/challenges/:_id',
+      name: 'challenge',
+      component: () => import('../views/ChallengeView.vue')
+    },
+    {
       path: '/about',
       name: 'about',
       // route level code-splitting

@@ -5,7 +5,7 @@ const { data: challenges } = await axios.get('http://127.0.0.1:3000/challenges/'
 </script>
 
 <template lang="pug">
-<ChallengesDetail challengedetails="challengesssss" />
+//- <ChallengesDetail challengedetails="challengesssss" />
 .challenges
   h1 Challenges
   ul

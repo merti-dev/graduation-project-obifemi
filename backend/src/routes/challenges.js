@@ -37,9 +37,9 @@ router.get('/:challengesID', async function (req, res, next) {
     return
   }
 
-  if (req.query.view === 'json') return res.send(challenge)
+  // if (req.query.view === 'json') return res.send(challenge)
 
-  res.render('challenge', {
+  res.status(200).send({
     user: user,
     challenge: challenge,
     questionID: 0,
