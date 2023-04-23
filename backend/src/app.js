@@ -11,6 +11,7 @@ var usersRouter = require('./routes/users')
 var challengesRouter = require('./routes/challenges')
 var Question = require('./question')
 // var questionsRouter = require('./routes/questions')
+const session = require('express-session')
 
 var app = express()
 app.use(cors())
