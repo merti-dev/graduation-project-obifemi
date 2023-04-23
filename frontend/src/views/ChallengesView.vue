@@ -17,7 +17,8 @@ const { data: challenges } = await axios.get('http://127.0.0.1:3000/challenges/'
   h1 Challenges
   ul
     li(v-for="challenge in challenges" :key="challenge._id")
-        ChallengeItem(:challenge="challenge")
+        //- ChallengeItem(:challenge="challenge")
+        <ChallengeItem :challenge="challenge" />
 
     //- li(v-for="challenge in challenges" :key="challenge._id")
     //-   RouterLink(:to="`/challenges/${challenge._id}`")
