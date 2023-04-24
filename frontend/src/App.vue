@@ -1,8 +1,9 @@
 <script>
 import { RouterLink, RouterView } from 'vue-router'
 import HelloWorld from './components/HelloWorld.vue'
-import Counter from './components/Counter.vue'
-import axios from 'axios'
+import { useAccountStore } from './stores/account'
+import { mapActions, mapState } from 'pinia'
+
 export default {
   name: 'App',
   components: {
@@ -10,19 +11,14 @@ export default {
     RouterLink,
     RouterView
   },
-  data() {
-    return
-    user: null
-  },
-  mounted() {
-    this.fetchUser()
+  async mounted() {
+    await this.fetchUser()
   },
   methods: {
-    async fetchUser() {
-      this.user = (
-        await axios.get('http://127.0.0.1:3000/accounts/session', { withCredentials: true })
-      ).data
-    }
+    ...mapActions(useAccountStore, ['fetchUser', 'logout'])
+  },
+  computed: {
+    ...mapState(useAccountStore, ['user'])
   }
 }
 </script>
@@ -32,12 +28,15 @@ export default {
     <div class="wrapper">
       <nav>
         <RouterLink to="/">Home</RouterLink>
+        <RouterLink to="/challenges">Challenges</RouterLink>
         <RouterLink to="/about">About</RouterLink>
-        <RouterLink to="/login">Log In</RouterLink>
-        <RouterLink to="/signup">Sign Up</RouterLink>
+        <RouterLink v-if="!user" to="/login">Log in</RouterLink>
+        <RouterLink v-if="!user" to="/signup">Sign up</RouterLink>
+        <a v-if="user" @click="logout">Log out</a>
       </nav>
     </div>
   </header>
+  <h1>Ling for {{ user?.name }}</h1>
   <Suspense>
     <RouterView />
   </Suspense>
@@ -45,7 +44,6 @@ export default {
 
 <style scoped>
 header {
-  display: block;
   line-height: 1.5;
   max-height: 100vh;
 }
@@ -82,9 +80,9 @@ nav a:first-of-type {
 
 @media (min-width: 1024px) {
   header {
-    display: block;
-    line-height: 1.5;
-    max-height: 100vh;
+    display: flex;
+    place-items: center;
+    padding-right: calc(var(--section-gap) / 2);
   }
 
   .logo {
@@ -92,10 +90,9 @@ nav a:first-of-type {
   }
 
   header .wrapper {
-    display: block;
-    /* place-items: flex-start;
-    flex-wrap: wrap; */
-    width: 100%;
+    display: flex;
+    place-items: flex-start;
+    flex-wrap: wrap;
   }
 
   nav {
