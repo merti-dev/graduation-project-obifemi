@@ -7,34 +7,40 @@ console.log('SimLang is a an app in which people can learn German')
 let MertData = { name: 'Mert', level: 'B2' }
 
 async function main() {
-  const Mert = await axios.post('http://localhost:3000/users', { name: 'Mert', level: 'B2' })
-  // console.log('Mert: ', Mert.data)
-
-  const elif = await axios.post('http://localhost:3000/users', { name: 'Elif', level: 'B2' })
-  // console.log('Elif:', elif.data)
-
-  const allUsers = await axios.get('http://localhost:3000/users')
-  // console.log('List of the name of all users', allUsers.data)
-
-  const mertt = await axios.get(`http://localhost:3000/users/${Mert.data._id}`)
-  // console.log('Mert:', mertt.data)
-
-  await axios.post('http://localhost:3000/questions')
-
-  const MertsChallenge = await axios.post(`http://localhost:3000/users/${Mert.data._id}/challenges`, {
-    level: 'B2',
-    challengesName: 'MertsChallenge',
-  })
-  console.log('MertsChallenge:', MertsChallenge.data.questions[0].question)
-
-  //   const bla = await axios.get('http://localhost:3000/challenges')
-  //   console.log('ChallengeList:', bla.data)
-
-  await axios.post(`http://localhost:3000/users/${Mert.data._id}/challenges/${MertsChallenge.data._id}/attendees`, {
-    userId: elif.data._id,
-  })
+  // const Mert = await axios.post('http://localhost:3000/users', { name: 'Mert', level: 'B2' })
+  // // console.log('Mert: ', Mert.data)
+  // const elif = await axios.post('http://localhost:3000/users', { name: 'Elif', level: 'B2' })
+  // // console.log('Elif:', elif.data)
+  // const allUsers = await axios.get('http://localhost:3000/users')
+  // // console.log('List of the name of all users', allUsers.data)
+  // const mertt = await axios.get(`http://localhost:3000/users/${Mert.data._id}`)
+  // // console.log('Mert:', mertt.data)
+  // await axios.post('http://localhost:3000/questions')
+  // const MertsChallenge = await axios.post(`http://localhost:3000/users/${Mert.data._id}/challenges`, {
+  //   level: 'B2',
+  //   challengesName: 'MertsChallenge',
+  // })
+  // console.log('MertsChallenge:', MertsChallenge.data.questions[0].question)
+  // //   const bla = await axios.get('http://localhost:3000/challenges')
+  // //   console.log('ChallengeList:', bla.data)
+  // await axios.post(`http://localhost:3000/users/${Mert.data._id}/challenges/${MertsChallenge.data._id}/attendees`, {
+  //   userId: elif.data._id,
+  // })
   // console.log('Elif Updated:', elif.data)
   // console.log("Mert's Challenge Data:", MertsChallenge.data)
+
+  // user creation through session
+  // const Mert = await axios.post('http://localhost:3000/users', {
+  //   name: 'Mert',
+  //   email: 'sadasd@aasds.com',
+  //   password: '123456',
+  // })
+
+  const loggedInMert = await axios.post('http://localhost:3000/accounts/session', {
+    email: 'sadasd@aasds.com',
+    password: '123456',
+  })
+  console.log('Mert:', loggedInMert.data)
 }
 
 main().catch(err => console.log(err))

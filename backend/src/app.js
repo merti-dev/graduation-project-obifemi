@@ -10,10 +10,22 @@ var indexRouter = require('./routes/index')
 var usersRouter = require('./routes/users')
 var challengesRouter = require('./routes/challenges')
 var Question = require('./question')
+var accountsRouter = require('./routes/accounts')
 // var questionsRouter = require('./routes/questions')
 const session = require('express-session')
 const MongoStore = require('connect-mongo')
 const mongoose = require('mongoose')
+
+// requires the model with Passport-Local Mongoose plugged in
+const User = require('./user')
+const passport = require('passport')
+
+// use static authenticate method of model in LocalStrategy
+passport.use(User.createStrategy())
+
+// use static serialize and deserialize of model for passport session support
+passport.serializeUser(User.serializeUser())
+passport.deserializeUser(User.deserializeUser())
 
 var app = express()
 app.use(cors())
@@ -33,6 +45,7 @@ app.use(
     }),
   })
 )
+app.use(passport.session())
 
 app.use((req, res, next) => {
   const numberOfVisits = req.session.numberOfVisits || 0
@@ -66,6 +79,7 @@ app.use(express.static(path.join(__dirname, 'public')))
 app.use('/', indexRouter)
 app.use('/users', usersRouter)
 app.use('/challenges', challengesRouter)
+app.use('/accounts', accountsRouter)
 // app.use('/questions', questionsRouter)
 app.post('/questions', async (req, res) => {
   const allQuestions = [

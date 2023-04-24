@@ -5,8 +5,10 @@ const User = require('../user')
 
 //Creation of Mert and Elif
 router.post('/', async function (req, res, next) {
-  const user = await User.create({ name: req.body.name, level: req.body.level })
+  const { name, email, password } = req.body
+  const user = await User.register({ name, email }, password)
   res.send(user)
+  await user.save()
 })
 
 /* GET users listing. */
