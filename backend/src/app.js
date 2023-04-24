@@ -28,7 +28,12 @@ passport.serializeUser(User.serializeUser())
 passport.deserializeUser(User.deserializeUser())
 
 var app = express()
-app.use(cors())
+app.use(
+  cors({
+    origin: true,
+    credentials: true,
+  })
+)
 const clientPromise = mongoose.connection.asPromise().then(connection => (connection = connection.getClient()))
 
 app.use(

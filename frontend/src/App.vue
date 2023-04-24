@@ -1,7 +1,30 @@
-<script setup>
+<script>
 import { RouterLink, RouterView } from 'vue-router'
 import HelloWorld from './components/HelloWorld.vue'
 import Counter from './components/Counter.vue'
+import axios from 'axios'
+export default {
+  name: 'App',
+  components: {
+    HelloWorld,
+    RouterLink,
+    RouterView
+  },
+  data() {
+    return
+    user: null
+  },
+  mounted() {
+    this.fetchUser()
+  },
+  methods: {
+    async fetchUser() {
+      this.user = (
+        await axios.get('http://127.0.0.1:3000/accounts/session', { withCredentials: true })
+      ).data
+    }
+  }
+}
 </script>
 
 <template>
@@ -10,7 +33,8 @@ import Counter from './components/Counter.vue'
       <nav>
         <RouterLink to="/">Home</RouterLink>
         <RouterLink to="/about">About</RouterLink>
-
+        <RouterLink to="/login">Log In</RouterLink>
+        <RouterLink to="/signup">Sign Up</RouterLink>
       </nav>
     </div>
   </header>

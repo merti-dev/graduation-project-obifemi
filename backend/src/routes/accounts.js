@@ -7,8 +7,8 @@ router.get('/session', async function (req, res, next) {
   res.send(req.session)
 })
 
-router.post('/session', passport.authenticate('local', { failureRedirect: '/login' }), function (req, res) {
-  res.redirect('/users')
+router.post('/session', passport.authenticate('local', { failWithError: true }), function (req, res) {
+  res.send(req.user)
 })
 
 module.exports = router
