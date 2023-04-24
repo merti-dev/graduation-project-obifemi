@@ -2,6 +2,7 @@ var express = require('express')
 var router = express.Router()
 const Challenge = require('../challenge')
 const User = require('../user')
+const challenge = require('../challenge')
 
 //join a challlenge
 // router.post('/:challengeId/attendees', async function (req, res, next) {
@@ -19,6 +20,10 @@ const User = require('../user')
 // })
 
 router.get('/', async function (req, res, next) {
+  // const numberOfVisits = req.session.numberOfVisits || 0
+  // console.log('numberOfVisits:', numberOfVisits)
+  // req.session.numberOfVisits = numberOfVisits + 1
+
   const challenges = await Challenge.find()
   if (req.query.view === 'json') return res.send(challenges)
   res.send(challenges)

@@ -12,9 +12,37 @@ var challengesRouter = require('./routes/challenges')
 var Question = require('./question')
 // var questionsRouter = require('./routes/questions')
 const session = require('express-session')
+const MongoStore = require('connect-mongo')
+const mongoose = require('mongoose')
 
 var app = express()
 app.use(cors())
+const connectionPromise = mongoose.connection.asPromise().then(connection => (connection = connection.getClient()))
+
+app.use(
+  session({
+    secret: 'keyboard cat',
+    resave: false,
+    saveUninitialized: true,
+    cookie: { secure: false, maxAge: 3600000 * 24 * 7 },
+    store: MongoStore.create({
+      // mongoUrl: process.env.MONGODB_CONNECTION_STRING,
+      clientPromise: connectionPromise,
+      // ttl: 3600000 * 24 * 7,
+    }),
+  })
+)
+
+app.use((req, res, next) => {
+  const numberOfVisits = req.session.numberOfVisits || 0
+  req.session.numberOfVisits = numberOfVisits + 1
+  req.session.history = req.session.history || []
+  req.session.history.push({ url: req.url, ip: req.ip })
+
+  console.log('req.session:', req.session)
+  // console.log('numberOfVisits:', numberOfVisits)
+  next()
+})
 
 // if (app.get('env') === 'development') {
 //   app.use(require('livereload')())
