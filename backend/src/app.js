@@ -17,7 +17,7 @@ const mongoose = require('mongoose')
 
 var app = express()
 app.use(cors())
-const connectionPromise = mongoose.connection.asPromise().then(connection => (connection = connection.getClient()))
+const clientPromise = mongoose.connection.asPromise().then(connection => (connection = connection.getClient()))
 
 app.use(
   session({
@@ -27,7 +27,8 @@ app.use(
     cookie: { secure: false, maxAge: 3600000 * 24 * 7 },
     store: MongoStore.create({
       // mongoUrl: process.env.MONGODB_CONNECTION_STRING,
-      clientPromise: connectionPromise,
+      clientPromise,
+      stringify: false,
       // ttl: 3600000 * 24 * 7,
     }),
   })
