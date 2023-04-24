@@ -12,9 +12,7 @@ export default {
     }
   },
   async created() {
-    const { data: challenge } = await axios.get(
-      ` http://127.0.0.1:3000/challenges/${this.$route.params._id}`
-    )
+    const { data: challenge } = await axios.get(`/challenges/${this.$route.params._id}`)
     this.challenge = challenge
     console.log(this.challenge)
   }
