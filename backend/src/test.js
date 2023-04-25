@@ -30,17 +30,17 @@ async function main() {
   // console.log("Mert's Challenge Data:", MertsChallenge.data)
 
   // user creation through session
-  // const Mert = await axios.post('http://localhost:3000/users', {
-  //   name: 'Mert',
-  //   email: 'sadasd@aasds.com',
-  //   password: '123456',
-  // })
-
-  const loggedInMert = await axios.post('http://localhost:3000/accounts/session', {
+  const Veli = await axios.post('http://localhost:3000/accounts/', {
+    name: 'Veli',
     email: 'sadasd@aasds.com',
     password: '123456',
   })
-  console.log('Mert:', loggedInMert.data)
+
+  // const loggedInMert = await axios.post('http://localhost:3000/accounts/session', {
+  //   email: 'sadasd@aasds.com',
+  //   password: '123456',
+  // })
+  console.log('Veli:', Veli.data)
 }
 
 main().catch(err => console.log(err))
