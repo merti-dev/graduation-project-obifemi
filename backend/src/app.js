@@ -45,7 +45,7 @@ app.use(
       secure: process.env.NODE_ENV === 'production',
       maxAge: 3600000 * 24 * 7,
       sameSite: 'none',
-      domain: process.env.NODE_ENV === 'production' ? 'api.mert.info' : 'localhost',
+      domain: process.env.NODE_ENV === 'production' ? 'api.mertin.info' : 'localhost',
     },
 
     store: MongoStore.create({
