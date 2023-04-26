@@ -56,7 +56,7 @@ app.use(
   })
 )
 app.use(passport.session())
-
+console.log(process.env.NODE_ENV, 'process.env.NODE_ENV')
 app.use((req, res, next) => {
   const numberOfVisits = req.session.numberOfVisits || 0
   req.session.numberOfVisits = numberOfVisits + 1
