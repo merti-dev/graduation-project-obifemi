@@ -6,7 +6,7 @@ import EcosystemIcon from './icons/IconEcosystem.vue'
 import CommunityIcon from './icons/IconCommunity.vue'
 import SupportIcon from './icons/IconSupport.vue'
 import axios from 'axios'
-const { data: challenges } = await axios.get('http://127.0.0.1:3000/challenges/')
+const { data: challenges } = await axios.get('/challenges/')
 </script>
 
 <template>

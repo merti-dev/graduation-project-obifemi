@@ -4,7 +4,7 @@ import ChallengesDetail from '../components/ChallengesDetail.vue'
 import Counter from '../components/Counter.vue'
 import CounterOptionsApiVue from '../components/CounterOptionsApi.vue'
 import ChallengeItem from '../components/ChallengeItem.vue'
-const { data: challenges } = await axios.get('http://127.0.0.1:3000/challenges/')
+const { data: challenges } = await axios.get('/challenges/')
 </script>
 
 <template lang="pug">
