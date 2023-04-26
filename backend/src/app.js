@@ -41,7 +41,12 @@ app.use(
     secret: 'keyboard cat',
     resave: false,
     saveUninitialized: true,
-    cookie: { secure: false, maxAge: 3600000 * 24 * 7 },
+    cookie: {
+      secure: process.env.NODE_ENV === 'production',
+      maxAge: 3600000 * 24 * 7,
+      sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'lax',
+    },
+
     store: MongoStore.create({
       // mongoUrl: process.env.MONGODB_CONNECTION_STRING,
       clientPromise,
