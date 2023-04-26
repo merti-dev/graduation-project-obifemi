@@ -10,7 +10,7 @@ const userSchema = new mongoose.Schema({
     {
       type: mongoose.Schema.Types.ObjectId,
       ref: 'Challenge',
-      autopopulate: { maxDepth: 1 },
+      autopopulate: { maxDepth: 2 },
     },
   ],
   score: { type: Number, default: 0 },

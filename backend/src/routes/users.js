@@ -3,10 +3,10 @@ var router = express.Router()
 const Challenge = require('../challenge')
 const User = require('../user')
 
-//Creation of Mert and Elif
+//Creation of User
 router.post('/', async function (req, res, next) {
-  const { name, email, password } = req.body
-  const user = await User.register({ name, email }, password)
+  const { name, email, password, level } = req.body
+  const user = await User.register({ name, email, level }, password)
   res.send(user)
   await user.save()
 })
