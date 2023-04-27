@@ -23,8 +23,10 @@ router.get('/', async function (req, res, next) {
   // const numberOfVisits = req.session.numberOfVisits || 0
   // console.log('numberOfVisits:', numberOfVisits)
   // req.session.numberOfVisits = numberOfVisits + 1
-
-  const challenges = await Challenge.find()
+  if (!req.user) {
+    return res.send([])
+  }
+  const challenges = await Challenge.find({ 'attendees.0': req.user._id })
   if (req.query.view === 'json') return res.send(challenges)
   res.send(challenges)
   // res.render('challenges', {
