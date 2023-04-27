@@ -42,10 +42,11 @@ app.use(
     resave: false,
     saveUninitialized: true,
     cookie: {
-      // secure: process.env.NODE_ENV === 'production',
+      secure: process.env.NODE_ENV === 'production',
+      httpOnly: true,
       maxAge: 3600000 * 24 * 7,
-      sameSite: 'lax',
-      domain: process.env.NODE_ENV === 'production' ? 'api.mertin.info' : 'localhost',
+      sameSite: process.env.NODE_ENV === 'production' ? 'none' : true,
+      domain: process.env.NODE_ENV === 'production' && 'api.mertin.info',
     },
 
     store: MongoStore.create({
