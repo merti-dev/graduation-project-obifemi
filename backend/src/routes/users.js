@@ -1,7 +1,7 @@
 var express = require('express')
 var router = express.Router()
-const Challenge = require('../challenge')
-const User = require('../user')
+const Challenge = require('../models/challenge')
+const User = require('../models/user')
 
 //Creation of User
 router.post('/', async function (req, res, next) {

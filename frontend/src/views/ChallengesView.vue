@@ -1,24 +1,24 @@
 <script setup>
 import axios from 'axios'
-import ChallengesDetail from '../components/ChallengesDetail.vue'
+// import ChallengesDetail from '../components/ChallengesDetail.vue'
 import Counter from '../components/Counter.vue'
 import CounterOptionsApiVue from '../components/CounterOptionsApi.vue'
 import ChallengeItem from '../components/ChallengeItem.vue'
+import { useAccountStore } from '../stores/account'
+import Challenges from '../components/Challenges.vue'
+
 const { data: challenges } = await axios.get('/challenges/')
+const userStore = useAccountStore()
 </script>
 
 <template lang="pug">
 <Counter name="Composition Api 1"  />
 <Counter name="Composition Api 2"  />
 
+Challenges(:challenges = "challenges")
 //- <CounterOptionsApiVue name="Option Api"  />
 //- <ChallengesDetail challengedetails="challengesssss" />
-.challenges
-  h1 Challenges
-  ul
-    li(v-for="challenge in challenges" :key="challenge._id")
-        //- ChallengeItem(:challenge="challenge")
-        <ChallengeItem :challenge="challenge" />
+
 
     //- li(v-for="challenge in challenges" :key="challenge._id")
     //-   RouterLink(:to="`/challenges/${challenge._id}`")

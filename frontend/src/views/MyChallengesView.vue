@@ -1,9 +1,13 @@
 <script>
 import { useAccountStore } from '../stores/account'
 import { mapState } from 'pinia'
+import ChallengeItem from '../components/ChallengeItem.vue'
 
 export default {
   name: 'MyChallengesView',
+  components: {
+    ChallengeItem
+  },
   computed: {
     ...mapState(useAccountStore, ['user'])
   }
@@ -11,8 +15,8 @@ export default {
 </script>
 
 <template lang="pug">
-h1 My Challenges: {{ user?.challenges }}
+h1 {{ user?.name }}'s Challenges:
 ul(v-if="user")
   li(v-for="challenge in user.challenges" :key="challenge._id")
-    router-link(:to="`/challenges/${challenge._id}`") {{challenge.challengesName}}
+    ChallengeItem(:challenge="challenge")
 </template>

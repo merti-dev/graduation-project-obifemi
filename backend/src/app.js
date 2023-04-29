@@ -9,7 +9,7 @@ require('./database-connection')
 var indexRouter = require('./routes/index')
 var usersRouter = require('./routes/users')
 var challengesRouter = require('./routes/challenges')
-var Question = require('./question')
+var Question = require('./models/question')
 var accountsRouter = require('./routes/accounts')
 // var questionsRouter = require('./routes/questions')
 const session = require('express-session')
@@ -17,7 +17,7 @@ const MongoStore = require('connect-mongo')
 const mongoose = require('mongoose')
 
 // requires the model with Passport-Local Mongoose plugged in
-const User = require('./user')
+const User = require('./models/user')
 const passport = require('passport')
 
 // use static authenticate method of model in LocalStrategy

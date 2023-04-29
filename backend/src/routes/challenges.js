@@ -1,8 +1,8 @@
 var express = require('express')
 var router = express.Router()
-const Challenge = require('../challenge')
-const User = require('../user')
-const challenge = require('../challenge')
+const Challenge = require('../models/challenge')
+const User = require('../models/user')
+const challenge = require('../models/challenge')
 
 //join a challlenge
 // router.post('/:challengeId/attendees', async function (req, res, next) {
@@ -23,11 +23,11 @@ router.get('/', async function (req, res, next) {
   // const numberOfVisits = req.session.numberOfVisits || 0
   // console.log('numberOfVisits:', numberOfVisits)
   // req.session.numberOfVisits = numberOfVisits + 1
-  if (!req.user) {
-    return res.send([])
-  }
-  const challenges = await Challenge.find({ 'attendees.0': req.user._id })
-  if (req.query.view === 'json') return res.send(challenges)
+  // if (!req.user) {
+  //   return res.send([])
+  // }
+  const challenges = await Challenge.find()
+  // if (req.query.view === 'json') return res.send(challenges)
   res.send(challenges)
   // res.render('challenges', {
   //   challenges: challenges,
@@ -71,21 +71,23 @@ router.get('/:challengesID/:questionID', async function (req, res, next) {
 router.post('/:challengesID/:questionID', async function (req, res, next) {
   const challenge = await Challenge.findById(req.params.challengesID)
   const questionID = +req.params.questionID
-  const user = await User.findById(req.body.userID)
+  const user = await User.findById(req.user._id)
   const question = challenge.questions[questionID]
+  let message = 'incorrect'
+  let score = user.score
 
   if (question.answer === req.body.answer) {
     user.score += 1
     await user.save()
-    // let scoree = String(user.score)
-    res.redirect(`/challenges/${challenge._id}/${questionID}?message=Correct&score=${user.score}`)
-    return
+    score = user.score
+    message = 'correct'
   }
-  res.redirect(`/challenges/${challenge._id}/${questionID}?message=Incorrect`)
-  // res.render('challenge', {
-  //   challenge: challenge,
-  //   questionID: questionID + 1,
-  // })
+  res.json({
+    challenge: challenge,
+    questionID: questionID,
+    message: message,
+    score: score,
+  })
 })
 
 module.exports = router
