@@ -7,8 +7,8 @@ console.log('SimLang is a an app in which people can learn German')
 let MertData = { name: 'Mert', level: 'B2' }
 
 async function main() {
-  // const Mert = await axios.post('http://localhost:3000/users', { name: 'Mert', level: 'B2' })
-  // // console.log('Mert: ', Mert.data)
+  const Mert = await axios.post('http://localhost:3000/users', { name: 'Mert', level: 'B2' })
+  console.log('Mert: ', Mert.data)
   // const elif = await axios.post('http://localhost:3000/users', { name: 'Elif', level: 'B2' })
   // // console.log('Elif:', elif.data)
   // const allUsers = await axios.get('http://localhost:3000/users')
@@ -30,11 +30,11 @@ async function main() {
   // console.log("Mert's Challenge Data:", MertsChallenge.data)
 
   // user creation through session
-  const Veli = await axios.post('http://localhost:3000/accounts/', {
-    name: 'Veli',
-    email: 'sadasd@aasds.com',
-    password: '123456',
-  })
+  // const Veli = await axios.post('http://localhost:3000/accounts/', {
+  //   name: 'Veli',
+  //   email: 'sadasd@aasds.com',
+  //   password: '123456',
+  // })
 
   // const loggedInMert = await axios.post('http://localhost:3000/accounts/session', {
   //   email: 'sadasd@aasds.com',
