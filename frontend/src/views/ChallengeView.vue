@@ -1,4 +1,5 @@
 <script>
+import Question from '../components/Question.vue'
 import { RouterLink } from 'vue-router'
 import axios from 'axios'
 export default {
@@ -12,8 +13,9 @@ export default {
       //this.answer
     }
   },
-  component: {
-    RouterLink
+  components: {
+    RouterLink,
+    Question
   },
   methods: {
     async submitAnswer(e) {
@@ -22,7 +24,14 @@ export default {
         `/challenges/${this.$route.params._id}/${this.questionID}`,
         { answer }
       )
+      console.log(result)
       this.message = result.message
+      this.score = result.score
+      this.questionID = result.questionID
+    },
+    resetMessage() {
+      this.message = ''
+      this.questionID = this.questionID + 1
     }
   },
   async created() {
@@ -40,15 +49,18 @@ div(v-if="challenge")
   h1 Welcome to German Challenge! Now you are in: {{challenge.challengesName}}
 
   div(v-if="message=='correct'")
-    h5.green Your Score is: #{score}
+    h5.green Your Score is: {{score}}
     h2.green Correct!
-    RouterLink(:to="`/challenges/${challenge._id}/${questionID+1}`") Next Question
+    //- RouterLink(:to="`/challenges/${challenge._id}/${questionID+1}`") Next Question
+    button(@click="resetMessage") Next Question
 
   div(v-else-if="message=='incorrect'")
     h2.red Incorrect!
-    RouterLink(:to="`/challenges/${challenge._id}/${questionID+1}`") Next Question
+    //- RouterLink(:to="`/challenges/${challenge._id}/${questionID+1}`") Next Question
+    button(@click="resetMessage") Next Question
 
   div(v-else)
+    //- Question(:challenge="challenge" :questionID="questionID" :score="score")
     form(@submit.prevent="submitAnswer")
       fieldset
         legend {{challenge.questions[questionID].question}}

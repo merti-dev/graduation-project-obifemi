@@ -18,4 +18,6 @@ export default {
         //- ChallengeItem(:challenge="challenge")
         ChallengeItem(:challenge="challenge")
 
+
+
 </template>

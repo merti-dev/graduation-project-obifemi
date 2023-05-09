@@ -1,29 +1,67 @@
-<script setup>
+<script>
 import axios from 'axios'
 // import ChallengesDetail from '../components/ChallengesDetail.vue'
-import Counter from '../components/Counter.vue'
-import CounterOptionsApiVue from '../components/CounterOptionsApi.vue'
-import ChallengeItem from '../components/ChallengeItem.vue'
-import { useAccountStore } from '../stores/account'
-import Challenges from '../components/Challenges.vue'
+import { useUserStore } from '../stores/user'
+import { mapActions } from 'pinia'
+import { socket } from '../stores/socket'
 
-const { data: challenges } = await axios.get('/challenges/')
-const userStore = useAccountStore()
+// const { data: challenges } = await axios.get('/challenges/')
+// const userStore = useAccountStore()
+// const userStore = useUserStore()
+// const doJoinChallenge = async () => {
+//   await userStore.joinChallenge(challenge._id)
+// }
+
+export default {
+  name: 'ChallengesView',
+  data() {
+    return {
+      challenges: []
+    }
+  },
+  async created() {
+    await this.getChallenge()
+
+    socket.on('challenge:joined', ({ challenge }) => {
+      console.log('challenge:joined', challenge)
+      this.challenges = this.challenges.map((c) => {
+        if (c._id === challenge._id) {
+          return challenge
+        }
+        return c
+      })
+    })
+  },
+
+  methods: {
+    ...mapActions(useUserStore, ['joinChallenge']),
+    async doJoinChallenge(challenge_id) {
+      await this.joinChallenge(challenge_id)
+
+      // this.$router.push(`/challenges/${challenge_id}`)
+    },
+    async getChallenge() {
+      const { data: challenges } = await axios.get('/challenges/')
+      this.challenges = challenges
+    }
+  }
+}
 </script>
 
 <template lang="pug">
-<Counter name="Composition Api 1"  />
-<Counter name="Composition Api 2"  />
+//- <Counter name="Composition Api 1"  />
+//- <Counter name="Composition Api 2"  />
 
-Challenges(:challenges = "challenges")
+//- Challenges(:challenges = "challenges")
 //- <CounterOptionsApiVue name="Option Api"  />
 //- <ChallengesDetail challengedetails="challengesssss" />
 
 
-    //- li(v-for="challenge in challenges" :key="challenge._id")
-    //-   RouterLink(:to="`/challenges/${challenge._id}`")
-    //-     | {{ challenge.challengesName }} - {{ challenge.level }}
-    //-   p {{ challenge.attendees.length }} people are attending
+li(v-for="challenge in challenges" :key="challenge._id")
+  RouterLink(:to="`/challenges/${challenge._id}`")
+    | {{ challenge.challengesName }} - {{ challenge.level }}
+  p {{ challenge.attendeeCount }} people are attending
+  button(@click="doJoinChallenge(challenge._id)") JOIN
 
 </template>
 
