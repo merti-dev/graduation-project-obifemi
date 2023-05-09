@@ -2,13 +2,13 @@ var express = require('express')
 var router = express.Router()
 const Challenge = require('../models/challenge')
 const User = require('../models/user')
+const socketServer = require('../socket-connection')
 
 //Creation of User
 router.post('/', async function (req, res, next) {
   const { name, email, password, level } = req.body
   const user = await User.register({ name, email, level }, password)
   res.send(user)
-  await user.save()
 })
 
 /* GET users listing. */
@@ -34,17 +34,18 @@ router.post('/:userId/challenges', async function (req, res, next) {
 })
 
 //join a challlenge //ask question about this
-router.post('/:userId/challenges/:challengeId/attendees', async function (req, res, next) {
+router.post('/challenges/:challengeId/attendees', async function (req, res, next) {
   const challenge = await Challenge.findById(req.params.challengeId)
 
-  const user = await User.findById(req.body.userId)
-  // console.log(Challenge.list)
+  // const user = await User.findById(req.body.userId)
+  // console.log(Challenge.list) //
   if (!challenge) {
     res.status(404).send('Challenge not found')
     return
   }
 
-  await user.joinChallenge(challenge)
+  await req.user.joinChallenge(challenge)
+  socketServer().emit('challenge:joined', { challenge })
   res.send(challenge)
   // console.log(user)
 })

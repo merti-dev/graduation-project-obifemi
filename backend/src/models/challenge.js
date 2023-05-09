@@ -1,25 +1,33 @@
 // const { allQuestions } = require('./question')
 const mongoose = require('mongoose')
+
 const autopopulate = require('mongoose-autopopulate')
-const challengeSchema = new mongoose.Schema({
-  level: String,
-  challengesName: String,
-  questions: [
-    {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: 'Question',
-      autopopulate: true,
-    },
-  ],
-  attendees: [
-    {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: 'User',
-      autopopulate: { maxDepth: 1 },
-    },
-  ],
-  winner: String,
-})
+const challengeSchema = new mongoose.Schema(
+  {
+    level: String,
+    challengesName: String,
+    description: String,
+    questions: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Question',
+        autopopulate: true,
+      },
+    ],
+    attendees: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User',
+        autopopulate: { maxDepth: 1 },
+      },
+    ],
+    winner: String,
+  },
+  { toJSON: { virtuals: true } }
+)
+// challengeSchema.virtual('attendeeCount').get(function () {
+//   return this.attendees.length
+// })
 
 class Challenge {
   // winner = ''
@@ -34,26 +42,31 @@ class Challenge {
   //   // }
   // }
 
-  get details() {
-    return `
-     # Level: ${this.level}
-
-     ## Challenge's Name: ${this.challengesName}
-
-     ## Questions: ${this.questions.map(q => q.question)}
-
-     ## Options:\n ${this.questions.map((q, index) => {
-       return `Option for Question ${index + 1}:\n${q.options.join('\n')}\n`
-     })}
-
-     ## Answers: ${this.questions.map(q => q.answer)}
-
-     ## Attendees: ${this.attendees.map(a => a.name)}
-    `
+  get attendeeCount() {
+    return this.attendees.length
   }
-  set details({ newDetails }) {
-    throw new Error('You cannot change the details of a challenge')
-  }
+
+  // get details() {
+  //   console.log('QUESTIONS!', this.questions)
+  //   return `
+  //    # Level: ${this.level}
+
+  //    ## Challenge's Name: ${this.challengesName}
+
+  //    ## Questions: ${this.questions.map(q => q.question)}
+
+  //    ## Options:\n ${this.questions.map((q, index) => {
+  //      return `Option for Question ${index + 1}:\n${q.options.join('\n')}\n`
+  //    })}
+
+  //    ## Answers: ${this.questions.map(q => q.answer)}
+
+  //    ## Attendees: ${this.attendees.map(a => a.name)}
+  //   `
+  // }
+  // set details({ newDetails }) {
+  //   throw new Error('You cannot change the details of a challenge')
+  // }
 
   // static create = (level, challengesName) => {
   //   const newChallenge = new Challenge(level, challengesName)

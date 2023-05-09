@@ -19,6 +19,7 @@ const mongoose = require('mongoose')
 // requires the model with Passport-Local Mongoose plugged in
 const User = require('./models/user')
 const passport = require('passport')
+const createSocketServer = require('./socket-connection')
 
 // use static authenticate method of model in LocalStrategy
 passport.use(User.createStrategy())
@@ -153,14 +154,7 @@ app.use(function (err, req, res, next) {
   res.render('error')
 })
 
-app.createSocketServer = function (server) {
-  const io = require('socket.io')(server, {
-    cors: {
-      origin: true,
-      credentials: true,
-    },
-  })
-}
+app.createSocketServer = createSocketServer
 
 // app.createSocketServer = function (server) {
 //   const io = require('socket.io')(server)

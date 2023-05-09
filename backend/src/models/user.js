@@ -3,6 +3,7 @@ const Question = require('./question')
 const mongoose = require('mongoose')
 const autopopulate = require('mongoose-autopopulate')
 const passportLocalMongoose = require('passport-local-mongoose')
+const generateDescription = require('../lib/openai')
 const userSchema = new mongoose.Schema({
   name: String,
   level: String,
@@ -19,7 +20,9 @@ const userSchema = new mongoose.Schema({
 // module.exports = mongoose.model('User', userSchema)
 class User {
   async createChallenge(level, challengesName) {
-    const challenge = await Challenge.create({ level: level, challengesName: challengesName })
+    const description = await generateDescription({ challengesName })
+
+    const challenge = await Challenge.create({ level: level, challengesName: challengesName, description: description })
     challenge.questions = await Question.find({ level: level })
     // this.challengesName = challengesName
     this.challenges.push(challenge._id)
@@ -29,10 +32,10 @@ class User {
     return challenge
   }
   async joinChallenge(challenge) {
-    this.challenges.push(challenge)
+    // this.challenges.push(challenge)
     challenge.attendees.push(this)
 
-    await this.save()
+    // await this.save()
     await challenge.save()
     // console.log(challenge)
     return challenge

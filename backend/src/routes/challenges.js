@@ -82,7 +82,7 @@ router.post('/:challengesID/:questionID', async function (req, res, next) {
     score = user.score
     message = 'correct'
   }
-  res.json({
+  res.send({
     challenge: challenge,
     questionID: questionID,
     message: message,
