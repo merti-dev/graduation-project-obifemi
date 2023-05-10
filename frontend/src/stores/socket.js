@@ -1,9 +1,7 @@
 import { defineStore } from 'pinia'
 import { io } from 'socket.io-client'
-
-export const socket = io(
-  import.meta.env.NODE_ENV === 'production' ? 'https://api.mertin.info' : 'http://127.0.0.1:3000'
-)
+console.log('socket env: ', import.meta.env)
+export const socket = io(import.meta.env.VITE_API_URL)
 
 export const useSocketStore = defineStore('Socket', {
   state: () => ({
