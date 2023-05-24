@@ -2,7 +2,7 @@ var express = require('express')
 var router = express.Router()
 const Challenge = require('../models/challenge')
 const User = require('../models/user')
-const challenge = require('../models/challenge')
+const socketServer = require('../socket-connection')
 
 //join a challlenge
 // router.post('/:challengeId/attendees', async function (req, res, next) {
@@ -78,6 +78,9 @@ router.post('/:challengesID/:questionID', async function (req, res, next) {
 
   if (question.answer === req.body.answer) {
     user.score += 1
+    if (questionID === challenge.questions.length - 1) {
+      socketServer().emit('score:updated', { user })
+    }
     await user.save()
     score = user.score
     message = 'correct'

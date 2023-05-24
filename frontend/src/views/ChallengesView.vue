@@ -38,7 +38,7 @@ export default {
     async doJoinChallenge(challenge_id) {
       await this.joinChallenge(challenge_id)
 
-      // this.$router.push(`/challenges/${challenge_id}`)
+      this.$router.push(`/challenges/${challenge_id}`)
     },
     async getChallenge() {
       const { data: challenges } = await axios.get('/challenges/')
