@@ -1,7 +1,7 @@
 const mongoose = require('mongoose')
 
 mongoose.connect(
-  'mongodb+srv://mertinal:mertovic@cluster0.shzkbue.mongodb.net/sample_mflix?retryWrites=true&w=majority',
+  'authentication mongodb url',
   { useNewUrlParser: true, useUnifiedTopology: true }
 )
 mongoose.connection.once('open', function () {
