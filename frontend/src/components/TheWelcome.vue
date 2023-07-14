@@ -11,7 +11,7 @@ const { data: challenges } = await axios.get('/challenges/')
 </script>
 
 <template>
-  <h1>Challenges</h1>
+  <h1>Challengesss</h1>
   <ul>
     <li v-for="challenge in challenges" :key="challenge.id">
       {{ challenge.level }}
