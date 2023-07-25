@@ -11,12 +11,12 @@ const { data: challenges } = await axios.get('/challenges/')
 </script>
 
 <template>
-  <button class="btn btn-primary">Primary button</button>
-
-  <h1>Challengesss</h1>
-  <ul>
-    <li v-for="challenge in challenges" :key="challenge.id">
-      {{ challenge.level }}
-    </li>
-  </ul>
+  <div class="container">
+    <h1>Challengesss</h1>
+    <ul>
+      <li v-for="challenge in challenges" :key="challenge.id">
+        {{ challenge.level }}
+      </li>
+    </ul>
+  </div>
 </template>
