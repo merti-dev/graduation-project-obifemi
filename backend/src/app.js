@@ -31,12 +31,10 @@ passport.deserializeUser(User.deserializeUser())
 
 var app = express()
 app.set('trust proxy', 1)
-app.use(
-  cors({
-    origin: 'https://frontend-565623834769.europe-west1.run.app',
-    credentials: true,
-  })
-)
+app.use(cors({
+  origin: ['https://frontend-565623834769.europe-west1.run.app', 'http://localhost:5173'],
+  credentials: true
+}))
 app.use(express.json())
 app.use(express.urlencoded({ extended: false }))
 app.use(cookieParser())
@@ -52,7 +50,7 @@ app.use(
       secure: process.env.NODE_ENV === 'production',
       httpOnly: true,
       maxAge: 3600000 * 24 * 7,
-      sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'lax'
+      sameSite: process.env.NODE_ENV === 'production' ? 'none' : true
     },
     
 
