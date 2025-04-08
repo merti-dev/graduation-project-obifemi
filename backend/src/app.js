@@ -53,7 +53,7 @@ app.use(
       httpOnly: true,
       maxAge: 3600000 * 24 * 7,
       sameSite: process.env.NODE_ENV === 'production' ? 'none' : true,
-      domain: process.env.NODE_ENV === 'production' && 'graduation-project-obifemi-565623834769.europe-west1.run.app',
+      domain: process.env.NODE_ENV === 'graduation-project-obifemi-565623834769.europe-west1.run.app',
     },
 
     store: MongoStore.create({
