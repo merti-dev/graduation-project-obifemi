@@ -7,9 +7,12 @@ router.get('/session', async function (req, res, next) {
   res.send(req.user)
 })
 
-router.post('/session', passport.authenticate('local', { failWithError: true }), function (req, res) {
+router.post('/session', passport.authenticate('local'), function (req, res) {
+  console.log('Logged in user:', req.user)
+  console.log('Session ID:', req.sessionID)
   res.send(req.user)
 })
+
 
 router.delete('/session', function (req, res) {
   req.logout(() => {
