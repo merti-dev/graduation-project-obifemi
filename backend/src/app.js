@@ -52,9 +52,9 @@ app.use(
       secure: process.env.NODE_ENV === 'production',
       httpOnly: true,
       maxAge: 3600000 * 24 * 7,
-      sameSite: process.env.NODE_ENV === 'production' ? 'none' : true,
-      domain: process.env.NODE_ENV === 'graduation-project-obifemi-565623834769.europe-west1.run.app',
+      sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'lax'
     },
+    
 
     store: MongoStore.create({
       // mongoUrl: process.env.MONGODB_CONNECTION_STRING,
