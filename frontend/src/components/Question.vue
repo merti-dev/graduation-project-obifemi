@@ -51,6 +51,6 @@ form(@submit.prevent="submitAnswer")
     div
       input#d(type='radio' name='answer' :value= "challenge.questions[questionID].options[3]")
       label(for='d') {{challenge.questions[questionID].options[3]}}
-    button(type='submit') Submit Answer
+    button(type='submit') Submit Answer.
 
 </template>
