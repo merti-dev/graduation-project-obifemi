@@ -14,7 +14,7 @@ block content
   else if message=='Incorrect'
 
     h2.red Incorrect!
-    a(href=`/challenges/${challenge._id}/${questionID+1}`) Next Question
+    a(href=`/challenges/${challenge._id}/${questionID+1}`) Next Question:
   else
 
     form(action=`/challenges/${challenge._id}/${questionID}` method='POST')
