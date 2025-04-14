@@ -33,7 +33,7 @@ export default {
       <nav>
         <RouterLink to="/">Home</RouterLink>
         <RouterLink to="/challenges">Challenges</RouterLink>
-        <RouterLink v-if="user" to="/my-challenges">My Challengess</RouterLink>
+        <RouterLink v-if="user" to="/my-challenges">My Challenges</RouterLink>
         <RouterLink v-if="!user" to="/login">Log in</RouterLink>
         <RouterLink v-if="!user" to="/signup">Sign up</RouterLink>
         <a v-if="user" @click="logout">Log out</a>
